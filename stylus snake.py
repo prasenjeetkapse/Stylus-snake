@@ -110,12 +110,9 @@ def gameLoop():
 
         # Convert BGR to HSV
         hsv = cv.cvtColor(thresh1, cv.COLOR_BGR2HSV)
-       
-    
-
+      
         lower_range  = np.array([110,50,50])
         upper_range = np.array([130,255,255])
-
 
         mask = cv.inRange(hsv, lower_range, upper_range)
         #masking HSV value selected color becomes black
@@ -132,14 +129,11 @@ def gameLoop():
                     
             c = max(contours, key = cv.contourArea) 
             M= cv.moments(c)   
-            xc = int(M['m10']/M['m00'])
+            xc = int(M['m10']/M['m00'])          #xc,yc are center of stylus
             yc = int(M['m01']/M['m00'])
             
-            #if (0<xc<200 and 0<yc<100) or (400<xc<600 and 0<yc<100) or (0<xc<300 and 300<yc<400) or (400<xc<600 and 300<yc<400):
-            #   continue
-        
             if xc>400:
-                print("right")                        #xc,yc are center of stylus
+                print("right")                        
                 x1_change = snake_block
                 y1_change = 0
             if xc<200:
@@ -155,8 +149,7 @@ def gameLoop():
                 y1_change = snake_block
                 x1_change = 0
 
-    
-            
+           
         cv.imshow('frame',resize)
         cv.imshow("mask",mask)
  
