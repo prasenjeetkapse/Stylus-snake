@@ -26,4 +26,7 @@ Stylus Snake Game is the advanced version of old nokia snake game. In the old ve
 
   ![Screenshot 2021-10-11 165910](https://user-images.githubusercontent.com/83348619/136782886-8da48f56-c7bd-4227-ba0d-fa3c7eac353b.png)
   
+  ## DEMO OF GAME
+[click here to watch](https://drive.google.com/file/d/1r-gjU_bMJOuxgVawyNNWE9IMlnQeyaIH/view?usp=sharing)
+  
   
