@@ -110,9 +110,12 @@ def gameLoop():
 
         # Convert BGR to HSV
         hsv = cv.cvtColor(thresh1, cv.COLOR_BGR2HSV)
-      
+       
+    
+
         lower_range  = np.array([110,50,50])
         upper_range = np.array([130,255,255])
+
 
         mask = cv.inRange(hsv, lower_range, upper_range)
         #masking HSV value selected color becomes black
@@ -129,11 +132,12 @@ def gameLoop():
                     
             c = max(contours, key = cv.contourArea) 
             M= cv.moments(c)   
-            xc = int(M['m10']/M['m00'])          #xc,yc are center of stylus
+            xc = int(M['m10']/M['m00'])
             yc = int(M['m01']/M['m00'])
             
+            
             if xc>400:
-                print("right")                        
+                print("right")                        #xc,yc are center of stylus
                 x1_change = snake_block
                 y1_change = 0
             if xc<200:
@@ -149,7 +153,8 @@ def gameLoop():
                 y1_change = snake_block
                 x1_change = 0
 
-           
+    
+            
         cv.imshow('frame',resize)
         cv.imshow("mask",mask)
  
@@ -161,22 +166,34 @@ def gameLoop():
             if ((150<=x<=200) and (150<=y<=200)) or ((150<=x<=450) and (200<=y<=250)) or ((400<=x<=450) and (250<=y<=300)):
                 game_close = True
 
-            if ((150<=foodx<=200) and (150<=foody<=200)) or ((150<=foodx<=450) and (200<=foody<=250)) or ((400<=foodx<=450) and (250<=foody<=300)):
-                continue
 
         if hur==hurdel_2:
-            if ((150<=x<=450) and (200<=y<=250)):
+            if ((150<=x<450) and (200<=y<250)):
                 game_close = True
 
-            if ((150<=foodx<=450) and (200<=foody<=250)):
-                continue
+           
 
         if hur==hurdel_3:
-            if ((150<=x<=200) and (150<=y<=200)):
+            if ((150<=x<200) and (150<=y<200)):
                 game_close = True
 
-            if ((150<=foodx<=200) and (150<=foody<=200)):
-                continue
+           
+        #if food is in hurdels then draw new food 
+        if hur == hurdel_1:
+            while ((100<=foodx<500) and (100<=foody<150)):
+                foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
+                foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+
+        if hur == hurdel_2:
+            while ((300<=foodx<400) and (100<=foody<300)):
+                foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
+                foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+
+        if hur == hurdel_2:
+            while ((100<=x<400) and (200<=y<250)):
+                foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
+                foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+
 
         
         x += x1_change
